@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6fa;
+      color: #222;
+    }
+
+    /* HEADER / HERO */
+    header {
+      background: linear-gradient(135deg, #0059ff, #ff2e2e);
+      color: white;
+      text-align: center;
+      padding:40px 20px;
+    }
+    .hero-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Profile Picture Style */
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 5px solid white;
+      object-fit: cover;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* On larger screens → text left + image right */
+    @media (min-width: 768px) {
+      .hero-container {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+      .hero-text {
+        max-width: 60%;
+      }
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    header p {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    header a {
+      background: white;
+      color: #ff0000;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    header a:hover {
+      background: #c40707;
+      color: white;
+    }
+
+    /* NAVIGATION */
+    nav {
+      background: #1e3c72;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      margin: 0 18px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ff1212;
+    }
+
+    /* MENU TOGGLE (MOBILE) */
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      nav a {
+        display: none;
+      }
+      .menu-toggle {
+        display: inline-block;
+      }
+      nav.active a {
+        display: block;
+        margin: 10px 0;
+      }
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 40px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #1e3c72;
+    }
+
+    /* PROJECT CARDS */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
+    }
+    .project {
+      background: #fff;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 10px rgb(0, 0, 0);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-top: 15px solid #ff1f1f;
+    }
+    .project:hover {
+      transform: translateY(-8px);
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+    }
+    .project img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    /* SKILLS */
+ .skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+  text-align: center;
+}
+.skills-grid img {
+  width: 60px;
+  height: 60px;
+}
+.skills-grid p {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #1e3c72;
+}
+
+    /* CONTACT FORM */
+    .contact-form {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .contact-form input, 
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .contact-form button {
+      background: #1e3c72;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    .contact-form button:hover {
+      background: #ff4b5c;
+    }
+    
+    /* FOOTER */
+    footer {
+      background: linear-gradient(135deg, #1e3c72, #ff4b5c);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* ANIMATIONS */
+    @keyframes grow {
+      from { width: 0; }
+      to { width: var(--skill-level); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+   /* ===== MOBILE VIEW ENHANCEMENTS ===== */
+@media (max-width:768px){
+  section{padding:20px;}
+  header h1{font-size:2rem;}
+  header p{font-size:1rem;}
+  .profile-pic{width:120px;height:120px;border-width:3px;}
+  .projects{grid-template-columns:1fr;gap:20px;}
+  .contact-form{width:95%;padding:15px;}
+  footer{font-size:.9rem;padding:15px;}
+}
+
+/* == SUPER SMALL SCREENS (≤480px) ===== */
+@media (max-width:480px){
+  nav{padding:10px;}
+  .menu-toggle{font-size:1.8rem;}
+  h2{font-size:1.3rem;}
+  p{font-size:.95rem;line-height:1.5;}
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+ <header>
+  <div class="hero-container">
+    <div class="hero-text">
+      <h1>Hello👋 I'm Sahil Jain</h1>
+      <p>Web Developer | Designer | Learner</p>
+    </div>
+    <img src="C:\Users\sahil\Pictures\SAHIL PROFILE.jpg" alt="Sahil Jain" class="profile-pic">
+  </div>
+</header>
+
+  <!-- NAV BAR -->
+  <nav>
+    <span class="menu-toggle">⋮</span>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- ABOUT ME -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p style="text-align:center; max-width:800px; margin:auto;">
+      💻 I'm a passionate full stack developer who loves creating modern and responsive websites. <br>
+      🎨 My mission is to blend creativity with technology and deliver engaging user experiences. <br>
+      ⚡ I strive to write clean, scalable code to build impactful, user-friendly, and visually appealing solutions. <br>
+      🌱 Always eager to learn new technologies and improve my skills. <br>
+    </p>
+  </section>
+
+  <!-- SKILLS -->
+<section id="skills">
+  <h2>My Skills</h2>
+  <div class="skills-grid">
+    <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"><p>HTML</p></div>
+    <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"><p>CSS</p></div>
+    <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"><p>JavaScript</p></div>
+    <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><p>Python</p></div>
+    <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"><p>C++</p></div>
+    <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><p>React</p></div>
+    <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><p>Node.js</p></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>My Projects</h2>
+  <div class="projects">
+    <div class="project">
+      <h3>To-Do List</h3>
+      <img src="C:\Users\sahil\Desktop\NM PORTFOLIO\TO DO LIST.jpeg" alt="TO-DO LIST" class="project-img">
+      <p>A To-Do List web app built using HTML, CSS, and JavaScript.</p>
+    </div>
+    <div class="project">
+      <h3>Class Timetable</h3>
+      <img src="C:\Users\sahil\Desktop\NM PORTFOLIO\TIMETABLE.jpeg" alt="CLASS TIMETABLE" class="project-img">
+      <p>Organized timetable built using HTML table elements.</p>
+    </div>
+    <div class="project">
+      <h3>Portfolio Webpage</h3>
+      <img src="C:\Users\sahil\Desktop\NM PORTFOLIO\PORTFOLIO.jpeg" alt="PORTFOLIO" class="project-img">
+      <p>A personal portfolio built with HTML, CSS, and JavaScript.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SIMPLE MODAL -->
+<div id="modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);text-align:center;">
+  <span onclick="modal.style.display='none'" style="position:absolute;top:20px;right:35px;color:white;font-size:40px;cursor:pointer;">&times;</span>
+  <img id="modal-img" style="max-width:90%;max-height:80%;margin-top:50px;">
+  <div id="caption" style="color:white;margin-top:10px;"></div>
+</div>
+
+<script>
+document.querySelectorAll(".project-img").forEach(img=>{
+  img.onclick=()=>{document.getElementById("modal").style.display="block";
+                  document.getElementById("modal-img").src=img.src;
+                  document.getElementById("caption").innerText=img.alt;}
+});
+</script>
+
+
+  <!-- CONTACT FORM-->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-form">
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+
+ <!-- SOCIAL LINKS -->
+<div style="text-align:center; margin-top:20px;">
+
+  <!-- LinkedIn -->
+  <a href="https://www.linkedin.com/in/sahil-jain-8127b1300/" 
+     target="_blank" 
+     style="color:#0A66C2; font-weight:bold; text-decoration:none; font-size:1.1rem; margin-right:20px;">
+    <img src="C:\Users\sahil\Downloads\linkedin.png" 
+         alt="LinkedIn" 
+         style="width:30px; height:auto; vertical-align:middle; margin-right:8px;">
+    Connect with me on LinkedIn
+  </a>
+
+  <!-- GitHub -->
+  <a href="https://github.com/sahiljain006" 
+     target="_blank" 
+     style="color:#333; font-weight:bold; text-decoration:none; font-size:1.1rem;">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" 
+         alt="GitHub" 
+         style="width:30px; height:auto; vertical-align:middle; margin-right:8px;">
+    View My GitHub
+  </a>
+</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 My Portfolio | Made with Love❤️</p>
+  </footer>
+
+  <!-- NAV SCRIPT -->
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+  </script>
+
+  <!-- BACK TO TOP BUTTON -->
+<button id="topBtn">↑</button>
+
+<style>
+#topBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+}
+</style>
+<script>
+  const topBtn = document.getElementById("topBtn");
+  window.onscroll = () => {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  };
+  topBtn.onclick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+</script>
+</body>
+</html>
