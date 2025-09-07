@@ -41,11 +41,11 @@ header h1 {
   margin-bottom: 15px;
   animation: fadeIn 1.5s;
 }
-
 header h2 {
   font-size: 1.3rem;
   margin-bottom: 15px;
   animation: fadeIn 2s;
+  color: #ffffff 
 }
 
 @media (min-width: 768px) {
@@ -61,7 +61,7 @@ header h2 {
 
 /* NAVIGATION */
 nav {
-  background: #ffffff;
+  background: #1e3c72;
   padding: 15px;
   text-align: center;
   position: sticky;
